@@ -6,7 +6,7 @@ require 'open-uri'
 require 'timeout'
 
 def can_connect?(ip,port,wait_sec=2)
- Timeout::timeout(wait_sec) {open(ip, port)}
+ Timeout::timeout(wait_sec) {open(ip, port.to_i)}
  return true
 rescue
   return false
