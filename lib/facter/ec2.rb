@@ -4,11 +4,14 @@
 
 require 'open-uri'
 require 'timeout'
+require 'socket'
 
 def can_connect?(ip,port,wait_sec=2)
- Timeout::timeout(wait_sec) {open(ip, port.to_i)}
+ Timeout::timeout(wait_sec) {TCPSocket.open(ip, port.to_i).close}
  return true
-rescue
+rescue Timeout::Error
+  return false
+rescue 
   return false
 end
 
